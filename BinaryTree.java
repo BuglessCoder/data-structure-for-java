@@ -1,20 +1,20 @@
 package sjjg;
 
 public class BinaryTree<T> {
-	public BinaryNode<T> root;		//¸ù½Úµã
+	public BinaryNode<T> root;		//æ ¹èŠ‚ç‚¹
 	
-	public BinaryTree(){	//¿Õ¹¹Ôì·½·¨£¨¿ÉÓÃÀ´¹¹Ôì¿ÕµÄ¶ş²æÊ÷£©
+	public BinaryTree(){	//ç©ºæ„é€ æ–¹æ³•ï¼ˆå¯ç”¨æ¥æ„é€ ç©ºçš„äºŒå‰æ ‘ï¼‰
 		this.root = null;
 	}
 
-	public BinaryTree(T[] prelist){		//ÒÔprelistÊı×éÎª²ÎÊı¹¹Ôì¶ş²æÊ÷
+	public BinaryTree(T[] prelist){		//ä»¥prelistæ•°ç»„ä¸ºå‚æ•°æ„é€ äºŒå‰æ ‘
 		this.root = create(prelist);
 	}
 	
 	private int i = 0;
 	
-	private BinaryNode<T> create(T[] prelist) {		//prelistÊı×éÖ¸¶¨¶ş²æÊ÷±íÃ÷¿Õ×ÓÊ÷µÄÏÈ¸ù±éÀúĞòÁĞ
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+	private BinaryNode<T> create(T[] prelist) {		//prelistæ•°ç»„æŒ‡å®šäºŒå‰æ ‘è¡¨æ˜ç©ºå­æ ‘çš„å…ˆæ ¹éå†åºåˆ—
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		BinaryNode<T> p = null;
 		if(i<prelist.length){
 			T e = prelist[i];
@@ -30,16 +30,16 @@ public class BinaryTree<T> {
 		return null;
 	}
 
-	public boolean isEmpty(){		//ÅĞ¿Õ
+	public boolean isEmpty(){		//åˆ¤ç©º
 		return this.root == null;
 	}
 	
-	public BinaryNode<T> insert(T x){		//²åÈëx×÷Îª¸ù½Úµã
+	public BinaryNode<T> insert(T x){		//æ’å…¥xä½œä¸ºæ ¹èŠ‚ç‚¹
 		return this.root = new BinaryNode<T>(x, this.root, null);
 		
 	}
 	
-	public BinaryNode<T> insert(BinaryNode<T> parent, T x, boolean leftChild){		//²åÈëx×÷Îªparent½ÚµãµÄ×ó/ÓÒº¢×Ó
+	public BinaryNode<T> insert(BinaryNode<T> parent, T x, boolean leftChild){		//æ’å…¥xä½œä¸ºparentèŠ‚ç‚¹çš„å·¦/å³å­©å­
 		if(x == null){
 			return null;
 		}
@@ -50,23 +50,23 @@ public class BinaryTree<T> {
 		
 	}
 	
-	public void remove(BinaryNode<T> parent, boolean leftChild){	//É¾³ıparent½ÚµãµÄ×ó/ÓÒ×ÓÊ÷
+	public void remove(BinaryNode<T> parent, boolean leftChild){	//åˆ é™¤parentèŠ‚ç‚¹çš„å·¦/å³å­æ ‘
 		if(leftChild){
 			parent.left = null;
 		}
 		else parent.right = null;
 	}
 	
-	public void clear(){		//Çå¿Õ¶ş²æÊ÷£¨É¾³ıËùÓĞ½Úµã£©
+	public void clear(){		//æ¸…ç©ºäºŒå‰æ ‘ï¼ˆåˆ é™¤æ‰€æœ‰èŠ‚ç‚¹ï¼‰
 		this.root = null;
 	}
 	
-	public void preorder(){		//Êä³öÏÈ¸ù±éÀú
+	public void preorder(){		//è¾“å‡ºå…ˆæ ¹éå†
 		preorder(this.root);
 		System.out.println();
 	}
 	
-	private void preorder(BinaryNode<T> p){		//µİ¹éÊµÏÖÏÈ¸ù±éÀú
+	private void preorder(BinaryNode<T> p){		//é€’å½’å®ç°å…ˆæ ¹éå†
 		if(p!=null){
 			System.out.println(p.data.toString() + " ");
 			preorder(p.left);
@@ -85,12 +85,12 @@ public class BinaryTree<T> {
 		return p.data.toString() + " " + toString(p.left) + toString(p.right);
 	}
 	
-	public void inorder(){		//Êä³öÖĞ¸ù±éÀú
+	public void inorder(){		//è¾“å‡ºä¸­æ ¹éå†
 		inorder(this.root);
 		System.out.println();
 	}
 	
-	private void inorder(BinaryNode<T> p){		//µİ¹éÊµÏÖÖĞ¸ù±éÀú
+	private void inorder(BinaryNode<T> p){		//é€’å½’å®ç°ä¸­æ ¹éå†
 		if(p!=null){
 			inorder(p.left);
 			System.out.println(p.data.toString() + " ");
@@ -98,12 +98,12 @@ public class BinaryTree<T> {
 		}
 	}
 	
-	public void postorder(){		//Êä³öºó¸ù±éÀú
+	public void postorder(){		//è¾“å‡ºåæ ¹éå†
 		postorder(this.root);
 		System.out.println();
 	}
 	
-	private void postorder(BinaryNode<T> p){		//µİ¹éÊµÏÖºó¸ù±éÀú
+	private void postorder(BinaryNode<T> p){		//é€’å½’å®ç°åæ ¹éå†
 		if(p!=null){
 			postorder(p.left);
 			postorder(p.right);
@@ -115,7 +115,7 @@ public class BinaryTree<T> {
 		return count(root);		
 	}
 	
-	public int count(BinaryNode<T> p){		//Çó½Úµã×ÜÊı£¨±éÀú£©
+	public int count(BinaryNode<T> p){		//æ±‚èŠ‚ç‚¹æ€»æ•°ï¼ˆéå†ï¼‰
 		if(p!=null){
 			return count(p.left) + count(p.right) + 1;
 		}
@@ -128,14 +128,14 @@ public class BinaryTree<T> {
 		
 	}
 	
-	public int height(BinaryNode<T> p){		//ÇóÊ÷¸ß£¨±éÀú£©
+	public int height(BinaryNode<T> p){		//æ±‚æ ‘é«˜ï¼ˆéå†ï¼‰
 		if(p!=null){
 			return (height(p.left) >= height(p.right)) ? height(p.left)+1 : height(p.left)+1;
 		}
 		return 0;
 	}
 	
-	public BinaryNode<T> search(BinaryNode<T> p, T x){		//²éÕÒÊı¾İÓòÎªxµÄ½Úµã
+	public BinaryNode<T> search(BinaryNode<T> p, T x){		//æŸ¥æ‰¾æ•°æ®åŸŸä¸ºxçš„èŠ‚ç‚¹
 		BinaryNode<T> find = null;
 		if(p!=null && x!=null){
 			if(p.data.equals(x)){
@@ -151,7 +151,7 @@ public class BinaryTree<T> {
 		return find;
 	}
 	
-	public BinaryNode<T> getParent(BinaryNode<T> p, BinaryNode<T> node){		//»ñÈ¡node½ÚµãµÄ¸¸Ä¸½Úµã
+	public BinaryNode<T> getParent(BinaryNode<T> p, BinaryNode<T> node){		//è·å–nodeèŠ‚ç‚¹çš„çˆ¶æ¯èŠ‚ç‚¹
 		BinaryNode<T> find = null;
 		if(p!=null){
 			if(p.left == node || p.right == node){
@@ -175,14 +175,8 @@ public class BinaryTree<T> {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+					
+		
 }
 
 
