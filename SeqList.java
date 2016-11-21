@@ -1,15 +1,15 @@
 package sjjg;
 
 public class SeqList<T> extends Object {
-	protected Object[] element;		//¶ÔÏóÊı×éelement´æ´¢Êı¾İÔªËØ
-	protected int n;				//Ë³Ğò±í³¤¶Èn£¨Ë³Ğò±íµÄÔªËØ¸öÊı£©
-	public SeqList(int length)		//¹¹Ôì·½·¨  ÈİÁ¿ÎªlengthµÄ¿Õ±í
+	protected Object[] element;		//å¯¹è±¡æ•°ç»„elementå­˜å‚¨æ•°æ®å…ƒç´ 
+	protected int n;				//é¡ºåºè¡¨é•¿åº¦nï¼ˆé¡ºåºè¡¨çš„å…ƒç´ ä¸ªæ•°ï¼‰
+	public SeqList(int length)		//æ„é€ æ–¹æ³•  å®¹é‡ä¸ºlengthçš„ç©ºè¡¨
 	{
-		this.element = new Object[length];		//ÉêÇëÊı×é´æ´¢¿Õ¼ä£¨ÔªËØÎªnull£©
+		this.element = new Object[length];		//ç”³è¯·æ•°ç»„å­˜å‚¨ç©ºé—´ï¼ˆå…ƒç´ ä¸ºnullï¼‰
 		this.n = 0;
 	}
 	
-	public SeqList(){		//¹¹Ôì·½·¨£¨ÖØÔØ£©  Ä¬ÈÏÈİÁ¿µÄ¿Õ±í
+	public SeqList(){		//æ„é€ æ–¹æ³•ï¼ˆé‡è½½ï¼‰  é»˜è®¤å®¹é‡çš„ç©ºè¡¨
 		this(64);			//
 	}
 	
@@ -64,7 +64,7 @@ public class SeqList<T> extends Object {
 		if(this.n == element.length){
 			this.element = new Object[source.length*2];
 			for(int j=0;j<i;j++)
-				this.element[j] = source[i];
+				this.element[j] = source[j];
 		}
 		for(int j=this.n-1;j>=i;j--){
 			this.element[j+1] = source[j];
