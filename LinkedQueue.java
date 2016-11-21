@@ -10,31 +10,32 @@ public class LinkedQueue<T> implements Queue {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		return this.front == null && this.rear == null;
 	}
 
 	@Override
 	public boolean add(Object x) {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		if(x == null)
 			return false;
 		Node<T> q = new Node<T>((T) x,null);
 		if(this.front == null)
 			this.front = q;
 		else this.rear.next = q;
+		this.rear = q;
 		return true;
 	}
 	
 	@Override
 	public Object peek() {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		return this.isEmpty()?null:this.front.data;
 	}
 
 	@Override
 	public Object poll() {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		if(isEmpty())
 			return null;
 		T x = this.front.data;
