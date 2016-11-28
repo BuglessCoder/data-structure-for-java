@@ -104,11 +104,11 @@ public class MatrixGragh<T> extends AbstractGraph<T> {
 	}
 
 	@Override
-	protected int next(int i, int j) {
+	protected int next(int i, int j) {						//返回vi在vj后边的后继邻接顶点序号
 		// TODO 自动生成的方法存根
 		int n = this.count();
 		if(i>=0 && i<n && j>=-1 && j<n && i!=j){
-			for(int k=j+1;k<n;k++){
+			for(int k=j+1;k<n;k++){ 
 				if(this.m.get(i, k)>0 && this.m.get(i, k)<MAX){
 					return k;
 				}
@@ -116,7 +116,176 @@ public class MatrixGragh<T> extends AbstractGraph<T> {
 		}
 		return -1;
 	}
-
+	
+	public void DFSTraverse(int i){							//深度优先搜索遍历
+		boolean[] visited = new boolean[this.count()];
+		int j = i;
+		do{
+			if(!visited[j]){
+				System.out.print("{");
+				this.depthfs(j, visited);
+				System.out.print("}");
+			}
+			j = (j+1)%this.count();
+		}while(j!=i);
+		System.out.println();
+	}
+	
+	private void depthfs(int i, boolean[] visited){ 		
+		System.out.print(this.getV(i) + "");
+		visited[i] = true;
+		int j = this.next(i, -1);
+		while(j!=-1){
+			if(!visited[j]){
+				depthfs(j,visited);
+			}
+			j = this.next(i, j);
+		}
+	}
+	
+	public void BFSTraverse(int i){						//广度优先搜索遍历
+		boolean[] visited = new boolean[this.count()];	
+		int j = i;
+		do{
+			if(!visited[j]){
+				System.out.print("{");
+				this.breadthfs(j, visited);
+				System.out.print("}");
+			}
+			j = (j+1)%this.count();
+		}while(j!=i);
+		System.out.println();
+		
+	}
+	
+	private void breadthfs(int i, boolean[] visited){
+		System.out.print(this.getV(i) + "");
+		visited[i] = true;
+		LinkedQueue<Integer> que = new LinkedQueue<Integer>();
+		que.add(i);
+		while(!que.isEmpty()){
+			i = (int) que.poll();
+			for(int j=next(i,-1);j!=-1;j=next(i,j)){
+				if(!visited[j]){
+					System.out.print(this.getV(j) + "");
+					visited[j] = true;
+					que.add(j);
+				}
+			}
+		}
+		
+		
+	}
+	
+	public void minSpanTree(){							//用Prim算法构造最小生成树
+		Triple[] mst = new Triple[this.count()-1];
+		for(int i=0;i<mst.length;i++){
+			mst[i] = new Triple(0,i+1,this.weight(0, i+1));
+		}
+		for(int i=0;i<mst.length;i++){
+			int minweight = mst[i].value;
+			int min = i;
+			for(int j=i+1;j<mst.length;j++){
+				if(mst[j].value<minweight){
+					minweight = mst[j].value;
+					min = j;
+				}
+			}
+			Triple edge = mst[min];
+			mst[min] = mst[i];
+			mst[i] = edge;
+			int tv = edge.column;
+			for(int j=i+1;j<mst.length;j++){
+				int v = mst[j].column;
+				int weight = this.weight(tv, v);
+				if(weight<mst[j].value){
+					mst[j] = new Triple(tv,v,weight);
+				}
+			}
+		}
+		System.out.print("最小生成树的边集合：");
+		int mincost = 0;
+		for(int i=0;i<mst.length;i++){
+			System.out.print(mst[i] + "  ");
+			mincost+=mst[i].value;
+		}
+		System.out.println("\n最小代价为：" + mincost);
+	}
+	
+	
+	public void shortestPath(int i){				//用Dijkstra算法获得从某个顶点到其他顶点的单源最短路径
+		int n = this.count();
+		boolean[] vset = new boolean[n];
+		vset[i] = true;
+		int[] dist = new int[n];
+		int[] path = new int[n];
+		
+		for(int j=0;j<n;j++){
+			dist[j] = this.weight(i, j);
+			if(j!=i && dist[j]<MAX){
+				path[j] = i;
+			}
+			else path[j] = -1;
+		}
+		
+		for(int j=(i+1)%n;j!=i;j=(j+1)%n){
+			int mindist = MAX;
+			int min = 0;
+			
+			for(int k=0;k<n;k++){
+				if(!vset[k] && dist[k]<mindist){
+					mindist = dist[k];
+					min = k;
+				}
+			}
+			
+			if(mindist == MAX){
+				break;
+			}
+			
+			vset[min] = true;
+			
+			for(int k=0;k<n;k++){
+				if(!vset[k] && this.weight(min, k)<MAX && dist[min]+this.weight(min, k)<dist[k]){
+					dist[k] = dist[min] + this.weight(min, k);
+					path[k] = min;
+				}
+			}
+		}
+		System.out.println(this.getV(i) + "点的单源最短路径：");
+		for(int j=0;j<n;j++){
+			if(j!=i){
+				SinglyList<T> pathlink = new SinglyList<T>();
+				pathlink.insert(0, this.getV(j));
+				for(int k=path[j];k!=i && k!=j && k!=-1;k=path[k]){
+					pathlink.insert(0, this.getV(k));
+				}
+				pathlink.insert(0, this.getV(i));
+				System.out.println(pathlink.toString() + "长度" + (dist[j] == MAX ? "∞" : dist[j]) + ",");
+				
+			}
+		}
+		System.out.println();
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

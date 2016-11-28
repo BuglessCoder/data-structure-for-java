@@ -13,12 +13,36 @@ public class TestMatrixGragh {
 		
 		MatrixGragh<String> g = new	MatrixGragh<String>(s,edges);
 		System.out.println("带权无向图G3（除顶点F）：\n" + g.toString());
+		
 		int i = g.insertV("F");
 		g.insertEdge(3,i,13);
 		g.insertEdge(i,3,13);
 		g.insertEdge(4,i,11);
 		g.insertEdge(i,4,11);
 		System.out.println("带权无向图G3（加顶点F）：\n" + g.toString());
+		
+		System.out.println("DFS遍历：");		//测试DFS
+		for(int j=0;j<g.count();j++){
+			g.DFSTraverse(j);			
+		}
+		
+		System.out.println();
+		
+		System.out.println("BFS遍历：");		//测试BFS
+		for(int j=0;j<g.count();j++){
+			g.BFSTraverse(j);			
+		}
+		
+		System.out.println();			
+		g.minSpanTree();					//测试最小生成树
+		
+		System.out.println();
+		for(int j=0;j<g.count();j++){
+			g.shortestPath(j);				//测试单源最短路径
+		}
+		
+		
+		
 		
 	}
 
